@@ -39,8 +39,8 @@ class PlaylistSong(db.Model):
     __tablename__ = "playlists_songs"
 
     id = db.Column(db.Integer, primary_key = True, autoincrement=True)
-    playlist_id= db.Column(db.Integer, nullable=False)
-    song_id = db.Column(db.Integer, nullable=False)
+    playlist_id= db.Column(db.Integer, db.ForeignKey('playlists.id'), nullable=False)
+    song_id = db.Column(db.Integer, db.ForeignKey('songs.id'), nullable=False)
 
 
 # DO NOT MODIFY THIS FUNCTION

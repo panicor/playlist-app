@@ -95,8 +95,9 @@ def show_song(song_id):
 
     # ADD THE NECESSARY CODE HERE FOR THIS ROUTE TO WORK
     song = Song.query.get(song_id)
+    playlists = Playlist.query.all()
 
-    return render_template("song.html", song=song)
+    return render_template("song.html", song=song, playlists=playlists)
 
 
 @app.route("/songs/add", methods=["GET", "POST"])
@@ -137,12 +138,15 @@ def add_song_to_playlist(playlist_id):
 
     # Restrict form to songs not already on this playlist
 
-    curr_on_playlist = ...
-    form.song.choices = ...
+    curr_on_playlist = [s.id for s in playlist.songs]
+    form.song.choices = (db.session.query(Song.id, Song.title).filter(Song.id.notin_(curr_on_playlist)).all())
 
     if form.validate_on_submit():
 
           # ADD THE NECESSARY CODE HERE FOR THIS ROUTE TO WORK
+          playlist_song = PlaylistSong(song_id=form.song.data,playlist_id=playlist_id)
+          db.session.add(playlist_song)
+          db.session.commit()
 
           return redirect(f"/playlists/{playlist_id}")
 

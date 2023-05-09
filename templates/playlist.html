@@ -1,5 +1,5 @@
 {% extends 'base.html' %}
-
+{% block title %}{{ playlist.name }}{% endblock %}
 {% block content %}
 
 <div class="jumbotron">
@@ -12,6 +12,11 @@
 
 <div class="text-danger">
   SHOW ALL OF THE SONGS IN THIS PLAYLIST HERE
+  <ul>
+  {% for song in playlist%}
+      <li>{{ song.title }} - {{ song.artist}}</li>
+  {% endfor %}
+  </ul>
 </div>
 
 <p>
