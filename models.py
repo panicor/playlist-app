@@ -2,6 +2,7 @@
 
 from flask_sqlalchemy import SQLAlchemy
 
+
 db = SQLAlchemy()
 
 
@@ -16,8 +17,10 @@ class Playlist(db.Model):
     name = db.Column(db.Text, nullable=False)
     description = db.Column(db.Text, nullable=False)
 
-    playlist = db.relationship('Playlist', backref='playlists_songs', cascade='all')
 
+    songs = db.relationship('Song', secondary='playlists_songs', backref='associated_playlists', cascade='all')
+    # playlist = db.relationship('Playlist', secondary='playlists_songs', backref='playlists', cascade='all')
+    
 
 class Song(db.Model):
     """Song."""
@@ -29,7 +32,7 @@ class Song(db.Model):
     title = db.Column(db.Text, nullable=False)
     artist = db.Column(db.Text, nullable=False)
 
-    song = db.relationship('Song', backref='playlists_songs', cascade='all')
+    playlists = db.relationship('Playlist', secondary='playlists_songs', backref='associated_songs', cascade='all')
 
 
 class PlaylistSong(db.Model):
@@ -39,7 +42,7 @@ class PlaylistSong(db.Model):
     __tablename__ = "playlists_songs"
 
     id = db.Column(db.Integer, primary_key = True, autoincrement=True)
-    playlist_id= db.Column(db.Integer, db.ForeignKey('playlists.id'), nullable=False)
+    playlist_id = db.Column(db.Integer, db.ForeignKey('playlists.id'), nullable=False)
     song_id = db.Column(db.Integer, db.ForeignKey('songs.id'), nullable=False)
 
 

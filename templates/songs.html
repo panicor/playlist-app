@@ -2,15 +2,16 @@
 {% block title %}Songs{% endblock %}
 {% block content %}
 
-<h1>Check out the songs!</h1>
+<div class="container mt-4">
+  <h1>Check out the songs!</h1>
 
-<ul>
-{% for song in songs %}
-  <li><a href="/songs/{{song.id}}">{{ song.title }}</a></li>
-{% endfor %}
-</ul>
+  <ul class="list-group">
+    {% for song in songs %}
+      <li class="list-group-item"><a href="/songs/{{song.id}}">{{ song.title }}</a></li>
+    {% endfor %}
+  </ul>
 
-<p><a class="btn btn-primary" href="/songs/add">Add a song</a></p>
-
+  <p><a class="btn btn-primary mt-3" href="/songs/add">Add a song</a></p>
+</div>
 
 {% endblock %}

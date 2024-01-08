@@ -2,21 +2,23 @@
 {% block title %}{{ song.title }}{% endblock %}
 {% block content %}
 
-<div class="jumbotron">
-  <h1>{{ song.title }}!</h1>
-  <p class="lead">&ndash; {{ song.artist }}</p>
+
+
+<div class="container mt-4">
+  <div class="jumbotron">
+    <h1>{{ song.title }}</h1>
+    <p class="lead">{{ song.artist }}</p>
+  </div>
+
+  <h2>Playlists with {{ song.title }}</h2>
+  <ul class="list-group">
+    {% for playlist in playlists %}
+      {% if song in playlist.songs %}
+        <li class="list-group-item">{{ playlist.name }}</li>
+      {% endif %}
+    {% endfor %}
+  </ul>
 </div>
 
-<ul>
-  DISPLAY ALL OF THE PLAYLISTS THAT THIS SONG IS A PART OF
-
-  {% for playlist in playlists %}
-    {% if song in playlist %}
-      <li>{{playlist.title}}</li>
-    {% endif %}
-    
-  {% endfor %}
-  
-</ul>
 
 {% endblock %}

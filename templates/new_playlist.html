@@ -2,31 +2,30 @@
 {% block title %}New Playlist{% endblock %}
 {% block content %}
 
-<h1>Add a form that when submitted creates a new playlist!</h1>
-
-<form action='/playlists/add' method="POST">
-
-    <div class="row">
-        <label for="name" class="col">Name</label>
-        <div>
-            <input type="text" id="name" name="name">
-        </div>
-    </div>
-    
-    <div class="row">
-        <label for="description" class="col">Description</label>
-        <div>
-            <textarea id="description" name="description"></textarea>
-        </div>
-    </div>
-    
-    <div class="row">
-        <div>
-            <a href="/playlists" class="btn">Cancel</a>
-            <button type="submit" class="btn">Add</button>
-        </div>
-    </div>
-    
-    </form>
-
+    <div class="container mt-4">
+        <h1>Create a new playlist!</h1>
+      
+        <form action='/playlists/add' method="POST" class="col-md-6">
+          {{ form.hidden_tag() }}
+      
+          <!-- Name input -->
+          <div class="form-group">
+            <label for="name">Name</label>
+            <input type="text" class="form-control" id="name" name="name">
+          </div>
+      
+          <!-- Description input -->
+          <div class="form-group">
+            <label for="description">Description</label>
+            <textarea class="form-control" id="description" name="description" rows="4"></textarea>
+          </div>
+      
+          <!-- Buttons -->
+          <div class="form-group">
+            <a href="/playlists" class="btn btn-secondary mr-2">Cancel</a>
+            <button type="submit" class="btn btn-primary">Add</button>
+          </div>
+        </form>
+      
+      </div>
 {% endblock %}

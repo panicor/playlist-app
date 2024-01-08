@@ -2,31 +2,31 @@
 {% block title %}New Song{% endblock %}
 {% block content %}
 
-<h1>Add a form that when submitted creates a new song!</h1>
-
-<form action='/songs/add' method="POST">
-
-    <div class="row">
-        <label for="name" class="col">Name</label>
-        <div>
-            <input type="text" id="name" name="name">
-        </div>
-    </div>
-    
-    <div class="row">
-        <label for="description" class="col">Description</label>
-        <div>
-            <textarea id="description" name="description"></textarea>
-        </div>
-    </div>
-    
-    <div class="row">
-        <div>
-            <a href="/songs" class="btn">Cancel</a>
-            <button type="submit" class="btn">Add</button>
-        </div>
-    </div>
-    
+<div class="container mt-4">
+    <h1>Add a new song!</h1>
+  
+    <form action='/songs/add' method="POST" class="col-md-6">
+      {{ form.hidden_tag() }}
+  
+      <!-- Title input -->
+      <div class="form-group">
+        <label for="title">Title</label>
+        <input type="text" class="form-control" id="title" name="title">
+      </div>
+  
+      <!-- Artist input -->
+      <div class="form-group">
+        <label for="artist">Artist</label>
+        <input type="text" class="form-control" id="artist" name="artist">
+      </div>
+  
+      <!-- Buttons -->
+      <div class="form-group">
+        <a href="/songs" class="btn btn-secondary mr-2">Cancel</a>
+        <button type="submit" class="btn btn-primary">Add</button>
+      </div>
     </form>
+  
+  </div>
 
 {% endblock %}
